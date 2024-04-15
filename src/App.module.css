@@ -1,7 +1,11 @@
-.App {
+App.module.css .App {
     font-family: "Poppins", sans-serif;
     background-color: #e0dbdb;
     min-height: 100vh;
+}
+
+.Main {
+    padding-top: 81px;
 }
 
 * {
