@@ -12,6 +12,7 @@ import { axiosReq } from "../api/axiosDefaults";
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
+    const isAdmin = currentUser && currentUser.is_staff;
 
     const handleSignOut = async () => {
         try {
@@ -59,7 +60,7 @@ const NavBar = () => {
             to="/"
             onClick={handleSignOut}
         >
-            <i class="fa-solid fa-right-from-bracket"></i>Sign Out
+            <i className="fa-solid fa-right-from-bracket"></i>Sign Out
         </NavLink>
         <NavLink
             className={styles.NavLink}
@@ -101,7 +102,7 @@ const NavBar = () => {
                         <img src={logo} alt="logo" height="45" />
                     </Navbar.Brand>
                 </NavLink>
-                {currentUser && addAdvertIcon}
+                {isAdmin ? addAdvertIcon : null}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto text-left">
