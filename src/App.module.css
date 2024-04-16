@@ -1,4 +1,4 @@
-App.module.css .App {
+.App {
     font-family: "Poppins", sans-serif;
     background-color: #e0dbdb;
     min-height: 100vh;
@@ -6,6 +6,25 @@ App.module.css .App {
 
 .Main {
     padding-top: 81px;
+}
+
+.Content {
+    background-color: #bdbdc0;
+    padding: 10px;
+    border-radius: 2px;
+    border: 1px solid #e2c0f8;
+}
+
+.FillerImage {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.Image {
+    max-height: 40vh;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 * {
@@ -26,6 +45,10 @@ a:hover i {
     transition: color ease-in-out 0.3s;
 }
 
+input[type="file"] {
+    display: none;
+}
+
 i {
     color: #342646;
     font-size: 1.6rem;
@@ -37,4 +60,26 @@ i:hover {
     cursor: pointer;
     transition: color ease-in-out 0.3s;
     color: #7925ad;
+}
+
+figure {
+    text-align: center;
+    display: inline-block;
+}
+
+/* scroll bar */
+*::-webkit-scrollbar {
+    width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #9292a1;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

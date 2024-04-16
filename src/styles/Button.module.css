@@ -1,0 +1,63 @@
+.Button {
+    font-size: 1rem;
+    align-self: center;
+    border-radius: 100px;
+    border-color: transparent;
+    padding: 4px 8px;
+    margin-left: 2px;
+    margin-right: 2px;
+    min-width: 75px;
+}
+
+.Button:hover {
+    opacity: 0.6;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.Button:hover:active {
+    background-color: #AD35F7 !important;
+}
+
+.Button:active {
+    background-color: #AD35F7 !important;
+}
+
+.Button:focus {
+    background-color: #AD35F7;
+}
+
+.Wide {
+    padding: 10px 45px;
+    width: 100%;
+}
+
+.Purple,
+.PurpleOutline:hover,
+.Bright:hover {
+    background-color: #a78eb9;
+    color: #290a30;
+}
+
+.PurpleOutline,
+.Purple:hover {
+    background-color: #290a30;
+    color: #a78eb9;
+}
+
+.Black,
+.BlackOutline:hover {
+    background-color: #0A0C11;
+    color: #ffffff;
+}
+
+.Black:hover,
+.BlackOutline {
+    background-color: #ffffff;
+    color: #0A0C11;
+}
+
+.Bright {
+    background-color: #3e1747;
+    color: #c7bdce;
+}
