@@ -8,16 +8,21 @@ import { NavLink } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import { axiosReq } from "../api/axiosDefaults";
+import { toast } from "react-toastify";
+import UseClickOutsideToggle from "../hooks/UseClickOutsideToggle";
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
     const isAdmin = currentUser && currentUser.is_staff;
 
+    const {expanded, setExpanded, ref} = UseClickOutsideToggle();
+
     const handleSignOut = async () => {
         try {
             await axiosReq.post("dj-rest-auth/logout/");
             setCurrentUser(null);
+            toast.success("Signed out successfully!", { position: "top-center" });
         } catch (err) {
             console.log(err);
         }
@@ -34,13 +39,6 @@ const NavBar = () => {
     )
 
     const loggedInIcons = <>
-        <NavLink
-            className={styles.NavLink}
-            activeClassName={styles.Active}
-            to="/cats"
-        >
-            <i class="fa-solid fa-cat"></i>The Cats
-        </NavLink>
         <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
@@ -95,7 +93,12 @@ const NavBar = () => {
         </>
     )
     return (
-        <Navbar className={styles.NavBar} expand="lg" fixed="top">
+        <Navbar
+            expanded={expanded}
+            className={styles.NavBar}
+            expand="lg"
+            fixed="top"
+        >
             <Container>
                 <NavLink to="/">
                     <Navbar.Brand>
@@ -103,7 +106,11 @@ const NavBar = () => {
                     </Navbar.Brand>
                 </NavLink>
                 {isAdmin ? addAdvertIcon : null}
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle
+                    ref={ref}
+                    onClick={() => setExpanded(!expanded)}
+                    aria-controls="basic-navbar-nav"
+                />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto text-left">
                         <NavLink
@@ -112,7 +119,7 @@ const NavBar = () => {
                             activeClassName={styles.Active}
                             to="/"
                         >
-                            <i className="fa-solid fa-house-chimney"></i>Home
+                            <i class="fa-solid fa-cat"></i>The Cats
                         </NavLink>
                         {currentUser ? loggedInIcons : loggedOutIcons}
                     </Nav>
