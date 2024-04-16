@@ -14,7 +14,7 @@ import UseClickOutsideToggle from "../hooks/UseClickOutsideToggle";
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
-    const isAdmin = currentUser && currentUser.is_staff;
+    // const isAdmin = currentUser && currentUser.is_staff;
 
     const {expanded, setExpanded, ref} = UseClickOutsideToggle();
 
@@ -105,7 +105,8 @@ const NavBar = () => {
                         <img src={logo} alt="logo" height="45" />
                     </Navbar.Brand>
                 </NavLink>
-                {isAdmin ? addAdvertIcon : null}
+                {/* {isAdmin ? addAdvertIcon : null} */}
+                {currentUser && addAdvertIcon}
                 <Navbar.Toggle
                     ref={ref}
                     onClick={() => setExpanded(!expanded)}
