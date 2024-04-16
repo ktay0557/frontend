@@ -14,6 +14,7 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { toast } from "react-toastify";
 
 function SignInForm() {
     const setCurrentUser = useSetCurrentUser();
@@ -42,7 +43,9 @@ function SignInForm() {
             const {data} = await axios.post('/dj-rest-auth/login/', signInData);
             setCurrentUser(data.user);
             history.push('/');
+            toast.success(`Welcome ${username}`, {position: "top-center"});
         } catch (err) {
+            toast.error("Could not log in. Please try again", {position: "top-center"});
             setErrors(err.response?.data);
         }
     };

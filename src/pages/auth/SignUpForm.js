@@ -13,6 +13,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignUpForm = () => {
     const [signUpData, setSignUpData] = useState({
@@ -38,7 +39,9 @@ const SignUpForm = () => {
         try {
             await axios.post('/dj-rest-auth/registration/', signUpData);
             history.push('/signin');
+            toast.success("Successfully signed up! Please log in", {position: "top-center"});
         } catch (err) {
+            toast.error("Did not sign up. Please try again", {position: "top-center"});
             setErrors(err.response?.data);
         }
     };
