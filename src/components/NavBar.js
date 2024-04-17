@@ -14,9 +14,9 @@ import UseClickOutsideToggle from "../hooks/UseClickOutsideToggle";
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
-    // const isAdmin = currentUser && currentUser.is_staff;
+    // const isAdminUser = currentUser && currentUser.is_staff;
 
-    const {expanded, setExpanded, ref} = UseClickOutsideToggle();
+    const { expanded, setExpanded, ref } = UseClickOutsideToggle();
 
     const handleSignOut = async () => {
         try {
@@ -28,14 +28,23 @@ const NavBar = () => {
         }
     };
 
-    const addAdvertIcon = (
-        <NavLink
-            className={styles.NavLink}
-            activeClassName={styles.Active}
-            to="/adverts/create"
-        >
-            <i class="fa-regular fa-square-plus"></i>Create Advert
-        </NavLink>
+    const isAdminIcons = (
+        <>
+            <NavLink
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+                to="/adverts/create"
+            >
+                <i class="fa-regular fa-square-plus"></i>Create Advert
+            </NavLink>
+            <NavLink
+                className={styles.NavLink}
+                activeClassName={styles.Active}
+                to="/adoptions"
+            >
+                <i class="fa-solid fa-list"></i>Adoption Submissions
+            </NavLink>
+        </>
     )
 
     const loggedInIcons = <>
@@ -105,8 +114,8 @@ const NavBar = () => {
                         <img src={logo} alt="logo" height="45" />
                     </Navbar.Brand>
                 </NavLink>
-                {/* {isAdmin ? addAdvertIcon : null} */}
-                {currentUser && addAdvertIcon}
+                {/* {isAdminUser ? isAdminIcons : null} */}
+                {currentUser && isAdminIcons}
                 <Navbar.Toggle
                     ref={ref}
                     onClick={() => setExpanded(!expanded)}
