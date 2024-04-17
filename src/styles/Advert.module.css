@@ -1,9 +1,9 @@
-.Advert {
-    background-color: #ffffff;
-    border: 1px solid #dadadf;
-    border-radius: 2px;
-    margin-bottom: 16px;
-    text-align: center;
+.CardTitle {
+    font-size: 30px;
+}
+
+.AdvertBar {
+    text-align: right;
 }
 
 .Advert figure,

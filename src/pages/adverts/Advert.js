@@ -1,4 +1,5 @@
 import React from "react";
+import appStyles from "../../App.module.css";
 import styles from "../../styles/Advert.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
@@ -44,7 +45,7 @@ const Advert = (props) => {
                         : advert;
                 }),
             }));
-        } catch (err) { 
+        } catch (err) {
             console.log(err);
         }
     };
@@ -60,38 +61,60 @@ const Advert = (props) => {
                         : advert;
                 }),
             }));
-        } catch (err) { 
+        } catch (err) {
             console.log(err);
         }
     };
 
 
     return (
-        <Card className={styles.Advert}>
+        <Card className={appStyles.Content}>
             <Card.Body>
                 <Media className="align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
-                        <span>{title}</span>
+                        <Card.Title className={`${styles.CardTitle}`}>{title}</Card.Title>
                         {is_owner && advertPage && "..."}
                     </div>
                 </Media>
+                <Link to={`/adverts/${id}`}>
+                    <Card.Img src={image} alt={title} />
+                </Link>
             </Card.Body>
-            <Link to={`/adverts/${id}`}>
-                <Card.Img src={image} alt={title} />
-            </Link>
             <Card.Body>
-                {name && <Card.Text className="text-center">{name}</Card.Text>}
-                {age && <Card.Text className="text-center">{age}</Card.Text>}
-                {breed && <Card.Text className="text-center">{breed}</Card.Text>}
-                {sex && <Card.Text className="text-center">{sex}</Card.Text>}
-                {children && <Card.Text className="text-center">{children}</Card.Text>}
-                {other_animals && <Card.Text className="text-center">{other_animals}</Card.Text>}
-                {content && <Card.Text className="text-center">{content}</Card.Text>}
+                {name &&
+                    <Card.Text className="text-left">
+                        <strong>Name:</strong> {name}
+                    </Card.Text>}
+                {age &&
+                    <Card.Text className="text-left">
+                        <strong>Age:</strong> {age}
+                    </Card.Text>}
+                {breed &&
+                    <Card.Text className="text-left">
+                        <strong>Breed:</strong> {breed}
+                    </Card.Text>}
+                {sex &&
+                    <Card.Text className="text-left">
+                        <strong>Sex:</strong> {sex}</Card.Text>}
+                {children &&
+                    <Card.Text className="text-left">
+                        <strong>Behaviour with children:</strong> {children}
+                    </Card.Text>}
+                {other_animals &&
+                    <Card.Text className="text-left">
+                        <strong>Behaviour with animals:</strong> {other_animals}
+                    </Card.Text>}
+                {content &&
+                    <Card.Text className="text-left">
+                        <strong>Additional Infomation:</strong> {content}
+                    </Card.Text>}
             </Card.Body>
-            <span>{updated_at}</span>
             <div className={styles.AdvertBar}>
                 {is_owner ? (
-                    <OverlayTrigger placement="top" overlay={<Tooltip>You cannot like what you create</Tooltip>}>
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>You cannot like what you create</Tooltip>}
+                    >
                         <i className="far fa-heart" />
                     </OverlayTrigger>
                 ) : like_id ? (
@@ -112,6 +135,8 @@ const Advert = (props) => {
                     <i className="far fa-comments" />
                 </Link>
                 {comments_count}
+                <hr />
+                <span>{updated_at}</span>
             </div>
         </Card>
     );

@@ -19,7 +19,7 @@ function AdvertPage() {
                 const [{ data: advert }] = await Promise.all([
                     axiosReq.get(`/adverts/${id}`),
                 ]);
-                setAdvert({results: [advert]})
+                setAdvert({ results: [advert] })
                 console.log(advert)
             } catch (err) {
                 console.log(err);
@@ -33,6 +33,8 @@ function AdvertPage() {
         <Row className="h-100">
             <Col className="py-2 p-0 p-lg-2" lg={8}>
                 <Advert {...advert.results[0]} setAdverts={setAdvert} advertPage />
+            </Col>
+            <Col>
                 <Container className={appStyles.Content}>
                     Comments
                 </Container>
