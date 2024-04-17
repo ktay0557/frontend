@@ -35,14 +35,14 @@ const NavBar = () => {
                 activeClassName={styles.Active}
                 to="/adverts/create"
             >
-                <i class="fa-regular fa-square-plus"></i>Create Advert
+                <i className="fa-regular fa-square-plus"></i>Create Advert
             </NavLink>
             <NavLink
                 className={styles.NavLink}
                 activeClassName={styles.Active}
-                to="/adoptions"
+                to="/adoptions/create"
             >
-                <i class="fa-solid fa-list"></i>Adoption Submissions
+                <i className="fa-solid fa-list"></i>Adoption Submissions
             </NavLink>
         </>
     )
@@ -55,6 +55,13 @@ const NavBar = () => {
         >
             <i className="fa-solid fa-thumbs-up"></i>Liked
         </NavLink>
+        {/* <NavLink
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/adoptions"
+        >
+            <i className="fa-solid fa-clipboard-list"></i>Adoptions
+        </NavLink> */}
         <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
