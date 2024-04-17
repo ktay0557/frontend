@@ -1,0 +1,24 @@
+.Advert {
+    background-color: #ffffff;
+    border: 1px solid #dadadf;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.Advert figure,
+h5 {
+    margin: 0 0;
+}
+
+.Heart {
+    color: #AD35F7;
+}
+
+.Heart:hover {
+    color: #3e1747;
+}
+
+.HeartOutline:hover {
+    color: #AD35F7;
+}
