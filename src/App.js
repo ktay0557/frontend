@@ -8,6 +8,7 @@ import SignInForm from "./pages/auth/SignInForm";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import AdvertCreateForm from "./pages/adverts/AdvertCreateForm";
+import AdvertPage from "./pages/adverts/AdvertPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/adverts/create" render={() => <AdvertCreateForm />} />
+          <Route exact path="/adverts/:id" render={() => <AdvertPage />} />
           <Route render={() => <p>Page Not Found!</p>} />
         </Switch>
       </Container>

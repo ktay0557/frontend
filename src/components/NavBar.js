@@ -49,18 +49,26 @@ const NavBar = () => {
 
     const loggedInIcons = <>
         <NavLink
+            exact
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/adverts"
+        >
+            <i className="fa-solid fa-cat"></i>Cats
+        </NavLink>
+        <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
             to="/liked"
         >
-            <i class="fa-solid fa-thumbs-up"></i>Liked
+            <i className="fa-solid fa-thumbs-up"></i>Liked
         </NavLink>
         <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
             to="/about"
         >
-            <i class="fa-solid fa-address-card"></i>About
+            <i className="fa-solid fa-address-card"></i>About
         </NavLink>
         <NavLink
             className={styles.NavLink}
@@ -83,7 +91,7 @@ const NavBar = () => {
                 activeClassName={styles.Active}
                 to="/about"
             >
-                <i class="fa-solid fa-address-card"></i>About
+                <i className="fa-solid fa-address-card"></i>About
             </NavLink>
             <NavLink
                 className={styles.NavLink}
@@ -129,7 +137,7 @@ const NavBar = () => {
                             activeClassName={styles.Active}
                             to="/"
                         >
-                            <i class="fa-solid fa-cat"></i>The Cats
+                            <i className="fa-solid fa-house-chimney"></i>Home
                         </NavLink>
                         {currentUser ? loggedInIcons : loggedOutIcons}
                     </Nav>
