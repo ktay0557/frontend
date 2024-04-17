@@ -49,14 +49,6 @@ const NavBar = () => {
 
     const loggedInIcons = <>
         <NavLink
-            exact
-            className={styles.NavLink}
-            activeClassName={styles.Active}
-            to="/adverts"
-        >
-            <i className="fa-solid fa-cat"></i>Cats
-        </NavLink>
-        <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
             to="/liked"
@@ -137,7 +129,7 @@ const NavBar = () => {
                             activeClassName={styles.Active}
                             to="/"
                         >
-                            <i className="fa-solid fa-house-chimney"></i>Home
+                            <i className="fa-solid fa-cat"></i>Cats
                         </NavLink>
                         {currentUser ? loggedInIcons : loggedOutIcons}
                     </Nav>
