@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
 
 import Upload from "../../assets/upload.png";
 
@@ -13,6 +14,9 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { axiosReq } from "../../api/axiosDefaults";
+import { toast } from "react-toastify";
 
 function AdvertCreateForm() {
     const [advertData, setAdvertData] = useState({
@@ -40,6 +44,10 @@ function AdvertCreateForm() {
 
     const [errors, setErrors] = useState({});
 
+    const imageInput = useRef(null);
+
+    const history = useHistory();
+
     const handleChange = (event) => {
         setAdvertData({
             ...advertData,
@@ -57,6 +65,32 @@ function AdvertCreateForm() {
         }
     };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        const formData = new FormData();
+
+        formData.append('title', title)
+        formData.append('name', name)
+        formData.append('age', age)
+        formData.append('breed', breed)
+        formData.append('sex', sex)
+        formData.append('children', children)
+        formData.append('other_animals', other_animals)
+        formData.append('content', content)
+        formData.append('image', imageInput.current.files[0])
+
+        try {
+            const { data } = await axiosReq.post('/adverts/', formData);
+            history.push(`/adverts/${data.id}`);
+            toast.success("Advert added successfully!", { position: "top-center" });
+        } catch (err) {
+            if (err.response?.status !== 404) {
+                toast.error("Could not submit. Please try again", { position: "top-center" });
+                setErrors(err.response?.data);
+            }
+        }
+    };
+
     const textFields = (
         <div className="text-center">
             <Form.Group>
@@ -68,6 +102,7 @@ function AdvertCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+
             <Form.Group>
                 <Form.Label>Cat's Name</Form.Label>
                 <Form.Control
@@ -77,6 +112,7 @@ function AdvertCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+
             <Form.Group>
                 <Form.Label>Age</Form.Label>
                 <Form.Control
@@ -86,6 +122,7 @@ function AdvertCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+
             <Form.Group>
                 <Form.Label>Breed</Form.Label>
                 <Form.Control
@@ -95,6 +132,7 @@ function AdvertCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+
             <Form.Group>
                 <Form.Label>Sex</Form.Label>
                 <Form.Control
@@ -104,6 +142,7 @@ function AdvertCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+
             <Form.Group>
                 <Form.Label>Behaviour around children</Form.Label>
                 <Form.Control
@@ -113,6 +152,7 @@ function AdvertCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+
             <Form.Group>
                 <Form.Label>Behaviour around animals</Form.Label>
                 <Form.Control
@@ -122,6 +162,7 @@ function AdvertCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+
             <Form.Group>
                 <Form.Label>Additional Information</Form.Label>
                 <Form.Control
@@ -135,7 +176,7 @@ function AdvertCreateForm() {
 
             <Button
                 className={`${btnStyles.Button} ${btnStyles.Purple}`}
-                onClick={() => { }}
+                onClick={() => history.goBack()}
             >
                 cancel
             </Button>
@@ -146,7 +187,7 @@ function AdvertCreateForm() {
     );
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Row>
                 <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
                     <Container className={appStyles.Content}>{textFields}</Container>
@@ -167,8 +208,8 @@ function AdvertCreateForm() {
                                     </figure>
                                     <div>
                                         <Form.Label
-                                        className={`${btnStyles.Button} ${btnStyles.Purple} btn`}
-                                        htmlFor="image-upload"
+                                            className={`${btnStyles.Button} ${btnStyles.Purple} btn`}
+                                            htmlFor="image-upload"
                                         >
                                             Select Different Image
                                         </Form.Label>
@@ -187,9 +228,15 @@ function AdvertCreateForm() {
                                 id="image-upload"
                                 accept="image/*"
                                 onChange={handleChangeImage}
+                                ref={imageInput}
                             />
 
                         </Form.Group>
+                        {errors?.image?.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                                {message}
+                            </Alert>
+                        ))}
                         <div className="d-md-none">{textFields}</div>
                     </Container>
                 </Col>
