@@ -7,6 +7,7 @@ import Media from "react-bootstrap/Media";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Link } from "react-router-dom";
+import { axiosRes } from "../../api/axiosDefaults";
 
 const Advert = (props) => {
     const {
@@ -26,10 +27,44 @@ const Advert = (props) => {
         likes_count,
         comments_count,
         advertPage,
+        setAdverts,
     } = props;
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner
+
+    const handleLike = async () => {
+        try {
+            const { data } = await axiosRes.post("/likes/", { advert: id });
+            setAdverts((prevAdverts) => ({
+                ...prevAdverts,
+                results: prevAdverts.results.map((advert) => {
+                    return advert.id === id
+                        ? { ...advert, likes_count: advert.likes_count + 1, like_id: data.id }
+                        : advert;
+                }),
+            }));
+        } catch (err) { 
+            console.log(err);
+        }
+    };
+
+    const handleUnlike = async () => {
+        try {
+            await axiosRes.delete(`/likes/${like_id}/`);
+            setAdverts((prevAdverts) => ({
+                ...prevAdverts,
+                results: prevAdverts.results.map((advert) => {
+                    return advert.id === id
+                        ? { ...advert, likes_count: advert.likes_count - 1, like_id: null }
+                        : advert;
+                }),
+            }));
+        } catch (err) { 
+            console.log(err);
+        }
+    };
+
 
     return (
         <Card className={styles.Advert}>
@@ -60,11 +95,11 @@ const Advert = (props) => {
                         <i className="far fa-heart" />
                     </OverlayTrigger>
                 ) : like_id ? (
-                    <span onClick={() => { }}>
+                    <span onClick={handleUnlike}>
                         <i className={`fas fa-heart ${styles.Heart}`} />
                     </span>
                 ) : currentUser ? (
-                    <span onClick={() => { }}>
+                    <span onClick={handleLike}>
                         <i className={`fas fa-heart ${styles.HeartOutline}`} />
                     </span>
                 ) : (
