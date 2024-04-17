@@ -35,7 +35,7 @@ function App() {
             render={() => (
               <AdvertsPage
                 message="Hmm... No results. Adjust search or like a kitty."
-                filter={`likes__owner__advert=${profile_id}&ordering=-likes__created_at&`}
+                filter={`likes__owner=${profile_id}&ordering=-likes__created_at&`}
               />
             )}
           />
