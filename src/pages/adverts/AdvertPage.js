@@ -12,6 +12,10 @@ import CommentCreateForm from "../comments/CommentCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Comment from "../comments/Comment";
 
+import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
+import { fetchMoreData } from "../../utils/utils";
+
 function AdvertPage() {
     const { id } = useParams();
     const [advert, setAdvert] = useState({ results: [] });
@@ -38,10 +42,10 @@ function AdvertPage() {
 
     return (
         <Row className="h-100">
-            <Col className="py-2 p-0 p-lg-2" lg={8}>
+            <Col className="py-2 p-0 p-lg-2" lg={6}>
                 <Advert {...advert.results[0]} setAdverts={setAdvert} advertPage />
             </Col>
-            <Col>
+            <Col className="py-2 p-0 p-lg-2" lg={6}>
                 <Container className={appStyles.Content}>
                     {currentUser ? (
                         <CommentCreateForm
@@ -55,14 +59,20 @@ function AdvertPage() {
                         "Comments"
                     ) : null}
                     {comments.results.length ? (
-                        comments.results.map((comment) => (
-                            <Comment
-                                key={comment.id}
-                                {...comment}
-                                setAdvert={setAdvert}
-                                setComments={setComments}
-                            />
-                        ))
+                        <InfiniteScroll
+                            children={comments.results.map((comment) => (
+                                <Comment
+                                    key={comment.id}
+                                    {...comment}
+                                    setAdvert={setAdvert}
+                                    setComments={setComments}
+                                />
+                            ))}
+                            dataLength={comments.results.length}
+                            loader={<Asset spinner />}
+                            hasMore={!!comments.next}
+                            next={() => fetchMoreData(comments, setComments)}
+                        />
                     ) : currentUser ? (
                         <span>Nothing here yet, be the first to comment!</span>
                     ) : (
