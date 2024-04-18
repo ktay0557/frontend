@@ -19,10 +19,12 @@ function AdvertsPage({ message, filter = "" }) {
     const [hasLoaded, setHasLoaded] = useState(false);
     const { pathname } = useLocation();
 
+    const [query, setQuery] = useState("");
+
     useEffect(() => {
         const fetchAdverts = async () => {
             try {
-                const { data } = await axiosReq.get(`/adverts/?${filter}`);
+                const { data } = await axiosReq.get(`/adverts/?${filter}search=${query}`);
                 setAdverts(data);
                 setHasLoaded(true);
             } catch (err) {
@@ -31,8 +33,13 @@ function AdvertsPage({ message, filter = "" }) {
         };
 
         setHasLoaded(false);
-        fetchAdverts();
-    }, [filter, pathname]);
+        const timer =setTimeout(() => {
+            fetchAdverts();
+        }, 1000);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [filter, query, pathname]);
 
     return (
         <Row className="h-100">
@@ -42,6 +49,19 @@ function AdvertsPage({ message, filter = "" }) {
                     without a forever home in the UK. Why don't you see if you
                     can help us reduce that number.
                 </p>
+                <i className={`fas fa-search ${styles.SearchIcon}`} />
+                <Form
+                    className={styles.SearchBar}
+                    onSubmit={(event) => event.preventDefault()}
+                >
+                    <Form.Control
+                        type="text"
+                        className="mr-sm-2"
+                        placeholder="Search Our Cats"
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                    />
+                </Form>
                 {hasLoaded ? (
                     <>
                         {adverts.results.length ? (

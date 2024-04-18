@@ -40,9 +40,9 @@ const NavBar = () => {
             <NavLink
                 className={styles.NavLink}
                 activeClassName={styles.Active}
-                to="/adoptions/create"
+                to="/adoptions"
             >
-                <i className="fa-solid fa-list"></i>Adoption Submissions
+                <i className="fa-solid fa-clipboard-list"></i>Adoptions
             </NavLink>
         </>
     )
@@ -55,13 +55,14 @@ const NavBar = () => {
         >
             <i className="fa-solid fa-thumbs-up"></i>Liked
         </NavLink>
-        {/* <NavLink
+        <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
-            to="/adoptions"
+            to="/adoptions/create"
         >
-            <i className="fa-solid fa-clipboard-list"></i>Adoptions
-        </NavLink> */}
+            <i className="fa-solid fa-list"></i>Adopt a Cat
+        </NavLink>
+
         <NavLink
             className={styles.NavLink}
             activeClassName={styles.Active}
