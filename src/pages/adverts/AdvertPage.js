@@ -22,7 +22,7 @@ function AdvertPage() {
     useEffect(() => {
         const handleMount = async () => {
             try {
-                const [{ data: advert }, {data: comments}] = await Promise.all([
+                const [{ data: advert }, { data: comments }] = await Promise.all([
                     axiosReq.get(`/adverts/${id}`),
                     axiosReq.get(`/comments/?advert=${id}`),
                 ]);
@@ -56,7 +56,12 @@ function AdvertPage() {
                     ) : null}
                     {comments.results.length ? (
                         comments.results.map((comment) => (
-                            <Comment key={comment.id} {...comment} />
+                            <Comment
+                                key={comment.id}
+                                {...comment}
+                                setAdvert={setAdvert}
+                                setComments={setComments}
+                            />
                         ))
                     ) : currentUser ? (
                         <span>Nothing here yet, be the first to comment!</span>
