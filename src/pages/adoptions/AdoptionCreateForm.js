@@ -8,26 +8,26 @@ import Col from "react-bootstrap/Col";
 
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import { useHistory } from "react-router";
+import { axiosReq } from "../../api/axiosDefaults";
 
 function AdoptionCreateForm() {
+    const [errors, setErrors] = useState({});
+
     const [adoptionData, setAdoptionData] = useState({
-        // owner: '',
-        // advert: '',
-        // created_at: '',
         name: '',
         email: '',
         mobile: '',
         content: '',
     });
     const {
-        // owner,
-        // advert,
-        // created_at,
         name,
         email,
         mobile,
         content,
     } = adoptionData;
+
+    const history = useHistory();
 
     const handleChange = (event) => {
         setAdoptionData({
@@ -35,6 +35,26 @@ function AdoptionCreateForm() {
             [event.target.name]: event.target.value,
         });
     };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        const formData = new FormData();
+
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('mobile', mobile);
+        formData.append('content', content);
+
+        try {
+            const {data} = await axiosReq.post('/adoptions/', formData);
+            history.push(`/adoptions/${data.id}`)
+        } catch (err) {
+            console.log(err)
+            if (err.response?.status !== 401){
+                setErrors(err.response?.data)
+            }
+        }
+    }
 
     const textFields = (
         <div className="text-center">
@@ -89,7 +109,7 @@ function AdoptionCreateForm() {
     );
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Row>
                 <Col className="py-2 p-0 p-md-2" md={12}>
                     <Container className={`${appStyles.Content}`}>
