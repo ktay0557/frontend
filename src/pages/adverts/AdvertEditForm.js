@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -7,18 +7,16 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 
-import Upload from "../../assets/upload.png";
-
 import styles from "../../styles/AdvertCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { toast } from "react-toastify";
+import { useParams } from "react-router";
 
-function AdvertCreateForm() {
+function AdvertEditForm() {
     const [advertData, setAdvertData] = useState({
         title: '',
         name: '',
@@ -45,8 +43,44 @@ function AdvertCreateForm() {
     const [errors, setErrors] = useState({});
 
     const imageInput = useRef(null);
-
     const history = useHistory();
+    const { id } = useParams();
+
+    useEffect(() => {
+        const handleMount = async () => {
+            try {
+                const { data } = await axiosReq.get(`/adverts/${id}/`);
+                const {
+                    title,
+                    name,
+                    age,
+                    breed,
+                    sex,
+                    children,
+                    other_animals,
+                    content,
+                    image,
+                    is_owner
+                } = data;
+
+                is_owner ? setAdvertData({
+                        title,
+                        name,
+                        age,
+                        breed,
+                        sex,
+                        children,
+                        other_animals,
+                        content,
+                        image
+                    }) : history.push("/");
+            } catch (err) { 
+                console.log(err);
+            }
+        };
+
+        handleMount();
+    }, [history, id]);
 
     const handleChange = (event) => {
         setAdvertData({
@@ -77,15 +111,18 @@ function AdvertCreateForm() {
         formData.append('children', children);
         formData.append('other_animals', other_animals);
         formData.append('content', content);
-        formData.append('image', imageInput.current.files[0]);
+
+        if (imageInput?.current?.files[0]) {
+            formData.append('image', imageInput.current.files[0]);
+        }
 
         try {
-            const { data } = await axiosReq.post('/adverts/', formData);
-            history.push(`/adverts/${data.id}`);
-            toast.success("Advert added successfully!", { position: "top-center" });
+            await axiosReq.put(`/adverts/${id}/`, formData);
+            history.push(`/adverts/${id}`);
+            toast.success("Advert updated successfully!", { position: "top-center" });
         } catch (err) {
             if (err.response?.status !== 404) {
-                toast.error("Could not submit. Please try again", { position: "top-center" });
+                toast.error("Could not update. Please try again", { position: "top-center" });
                 setErrors(err.response?.data);
             }
         }
@@ -181,7 +218,7 @@ function AdvertCreateForm() {
                 cancel
             </Button>
             <Button className={`${btnStyles.Button} ${btnStyles.Purple}`} type="submit">
-                create
+                update
             </Button>
         </div>
     );
@@ -197,8 +234,6 @@ function AdvertCreateForm() {
                         className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
                     >
                         <Form.Group className="text-center">
-                            {image ? (
-                                <>
                                     <figure>
                                         <Image
                                             className={appStyles.Image}
@@ -211,18 +246,9 @@ function AdvertCreateForm() {
                                             className={`${btnStyles.Button} ${btnStyles.Purple} btn`}
                                             htmlFor="image-upload"
                                         >
-                                            Select Different Image
+                                            Update Image
                                         </Form.Label>
                                     </div>
-                                </>
-                            ) : (
-                                <Form.Label
-                                    className="d-flex justify-content-center"
-                                    htmlFor="image-upload"
-                                >
-                                    <Asset src={Upload} message="Tap to upload your image" />
-                                </Form.Label>
-                            )}
 
                             <Form.File
                                 id="image-upload"
@@ -245,4 +271,4 @@ function AdvertCreateForm() {
     );
 }
 
-export default AdvertCreateForm;
+export default AdvertEditForm;
