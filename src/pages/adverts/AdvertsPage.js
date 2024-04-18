@@ -13,6 +13,8 @@ import Advert from "./Advert";
 
 import NoResults from "../../assets/no-results.png";
 import Asset from "../../components/Asset";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 function AdvertsPage({ message, filter = "" }) {
     const [adverts, setAdverts] = useState({ results: [] });
@@ -65,9 +67,18 @@ function AdvertsPage({ message, filter = "" }) {
                 {hasLoaded ? (
                     <>
                         {adverts.results.length ? (
-                            adverts.results.map(advert => (
-                                <Advert key={advert.id} {...advert} setAdverts={setAdverts} />
-                            ))
+                            <InfiniteScroll 
+                                children={
+                                    adverts.results.map(advert => (
+                                        <Advert key={advert.id} {...advert} setAdverts={setAdverts} />
+                                    ))
+                                }
+                                dataLength={adverts.results.length}
+                                loader={<Asset spinner />}
+                                hasMore={!!adverts.next}
+                                next={() => fetchMoreData(adverts, setAdverts)}
+                            />
+
                         ) : (
                             <Container className={appStyles.Content}>
                                 <Asset src={NoResults} message={message} />
