@@ -10,6 +10,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import Advert from "./Advert";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import Comment from "../comments/Comment";
 
 function AdvertPage() {
     const { id } = useParams();
@@ -21,11 +22,12 @@ function AdvertPage() {
     useEffect(() => {
         const handleMount = async () => {
             try {
-                const [{ data: advert }] = await Promise.all([
+                const [{ data: advert }, {data: comments}] = await Promise.all([
                     axiosReq.get(`/adverts/${id}`),
+                    axiosReq.get(`/comments/?advert=${id}`),
                 ]);
-                setAdvert({ results: [advert] })
-                console.log(advert)
+                setAdvert({ results: [advert] });
+                setComments(comments);
             } catch (err) {
                 console.log(err);
             }
@@ -52,6 +54,15 @@ function AdvertPage() {
                     ) : comments.results.length ? (
                         "Comments"
                     ) : null}
+                    {comments.results.length ? (
+                        comments.results.map((comment) => (
+                            <Comment key={comment.id} {...comment} />
+                        ))
+                    ) : currentUser ? (
+                        <span>Nothing here yet, be the first to comment!</span>
+                    ) : (
+                        <span>Nothing here yet, why not join us to comment!</span>
+                    )}
                 </Container>
             </Col>
         </Row>
