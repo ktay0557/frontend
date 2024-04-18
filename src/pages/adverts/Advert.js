@@ -7,8 +7,9 @@ import Card from "react-bootstrap/Card";
 import Media from "react-bootstrap/Media";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Advert = (props) => {
     const {
@@ -32,7 +33,21 @@ const Advert = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
-    const is_owner = currentUser?.username === owner
+    const is_owner = currentUser?.username === owner;
+    const history = useHistory();
+
+    const handleEdit = () => {
+        history.push(`/adverts/${id}/edit`);
+    };
+
+    const handleDelete = async () => {
+        try {
+            await axiosRes.delete(`/adverts/${id}/`);
+            history.goBack();
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const handleLike = async () => {
         try {
@@ -73,8 +88,13 @@ const Advert = (props) => {
                 <Media className="align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                         <Card.Title className={`${styles.CardTitle}`}>{title}</Card.Title>
-                        {is_owner && advertPage && "..."}
                     </div>
+                    {is_owner && advertPage &&
+                        <MoreDropdown
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                        />
+                    }
                 </Media>
                 <Link to={`/adverts/${id}`}>
                     <Card.Img src={image} alt={title} />
