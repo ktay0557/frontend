@@ -30,7 +30,7 @@ function AdoptionPage() {
         <Row className="h-100">
             <Col className="py-2 p-0 p-lg-2" lg={8}>
                 <p>Please reply to adoption queries as soon as possible</p>
-                <p>Post component</p>
+                <p>Adoption component</p>
             </Col>
             <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
                 The cats need us!

@@ -14,6 +14,7 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 import AdvertEditForm from "./pages/adverts/AdvertEditForm";
 import AdoptionCreateForm from "./pages/adoptions/AdoptionCreateForm";
 import AdoptionPage from "./pages/adoptions/AdoptionPage";
+import AdoptionsPage from "./pages/adoptions/AdoptionsPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -42,16 +43,16 @@ function App() {
               />
             )}
           />
-          {/* <Route
+          <Route
             exact
             path="/adoptions"
             render={() => (
               <AdoptionsPage
-                message="Hmm... No results. Adjust search or adopt a kitty."
-                filter={`owner__adoption__owner=${profile_id}&ordering=-likes__created_at&`}
+                message="Hmm... No results. Plase adjust search."
+                filter={`owner__profile=${profile_id}&`}
               />
             )}
-          /> */}
+          />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/adverts/create" render={() => <AdvertCreateForm />} />
