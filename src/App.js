@@ -13,6 +13,7 @@ import AdvertsPage from "./pages/adverts/AdvertsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import AdvertEditForm from "./pages/adverts/AdvertEditForm";
 import AdoptionCreateForm from "./pages/adoptions/AdoptionCreateForm";
+import AdoptionPage from "./pages/adoptions/AdoptionPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -57,6 +58,7 @@ function App() {
           <Route exact path="/adverts/:id" render={() => <AdvertPage />} />
           <Route exact path="/adverts/:id/edit" render={() => <AdvertEditForm />} />
           <Route exact path="/adoptions/create" render={() => <AdoptionCreateForm />} />
+          <Route exact path="/adoptions/:id" render={() => <AdoptionPage />} />
           <Route render={() => <p>Page Not Found!</p>} />
         </Switch>
       </Container>
