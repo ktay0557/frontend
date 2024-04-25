@@ -38,6 +38,7 @@ const NavBar = () => {
                 <i className="fa-regular fa-square-plus"></i>Create Advert
             </NavLink>
             <NavLink
+                exact
                 className={styles.NavLink}
                 activeClassName={styles.Active}
                 to="/adoptions"

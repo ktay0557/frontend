@@ -42,16 +42,16 @@ function App() {
               />
             )}
           />
-          <Route
+          {/* <Route
             exact
             path="/adoptions"
             render={() => (
-              <AdvertsPage
+              <AdoptionsPage
                 message="Hmm... No results. Adjust search or adopt a kitty."
                 filter={`owner__adoption__owner=${profile_id}&ordering=-likes__created_at&`}
               />
             )}
-          />
+          /> */}
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/adverts/create" render={() => <AdvertCreateForm />} />
