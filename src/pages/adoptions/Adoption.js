@@ -10,7 +10,6 @@ import Avatar from "../../components/Avatar";
 const Adoption = (props) => {
     const {
         id,
-        owner,
         profile_id,
         profile_image,
         created_at,
@@ -31,7 +30,6 @@ const Adoption = (props) => {
                 <Media className="align-items-center justify-content-between">
                     <Link to={`/profiles/${profile_id}`}>
                         <Avatar src={profile_image} height={55} />
-                        {owner}
                     </Link>
                     <div className="d-flex align-items-center">
                         <span>{created_at}</span>

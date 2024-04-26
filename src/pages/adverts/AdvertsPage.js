@@ -35,7 +35,7 @@ function AdvertsPage({ message, filter = "" }) {
         };
 
         setHasLoaded(false);
-        const timer =setTimeout(() => {
+        const timer = setTimeout(() => {
             fetchAdverts();
         }, 1000);
         return () => {
