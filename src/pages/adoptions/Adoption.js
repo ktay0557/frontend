@@ -4,8 +4,10 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import Card from "react-bootstrap/Card";
 import Media from "react-bootstrap/Media";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdownStaff } from "../../components/MoreDropdownStaff";
 
 const Adoption = (props) => {
     const {
@@ -23,6 +25,16 @@ const Adoption = (props) => {
 
     const currentUser = useCurrentUser();
     const isAdminUser = currentUser && currentUser.is_staff_user;
+    const history = useHistory();
+
+    const handleDelete = async () => {
+        try {
+            await axiosRes.delete(`/adoptions/${id}/`);
+            history.goBack();
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <Card className={styles.Adoption}>
@@ -33,7 +45,11 @@ const Adoption = (props) => {
                     </Link>
                     <div className="d-flex align-items-center">
                         <span>{created_at}</span>
-                        {isAdminUser && adoptionPage && "..."}
+                        {isAdminUser && adoptionPage &&
+                            <MoreDropdownStaff
+                                handleDelete={handleDelete}
+                            />
+                        }
                     </div>
                 </Media>
             </Card.Body>
@@ -42,7 +58,6 @@ const Adoption = (props) => {
             </Link>
             <Card.Body>
                 {advert_id && <Card.Title className="text-center">{advert_id}</Card.Title>}
-                {name && <Card.Text>{name}</Card.Text>}
                 {email && <Card.Text>{email}</Card.Text>}
                 {mobile && <Card.Text>{mobile}</Card.Text>}
                 {content && <Card.Text>{content}</Card.Text>}

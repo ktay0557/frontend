@@ -66,8 +66,8 @@ function AdoptionCreateForm() {
 
         try {
             console.log(formData);
-            const { data } = await axiosReq.post('/adoptions/', formData);
-            history.push(`/adoptions/${data.id}`);
+            await axiosReq.post('/adoptions/', formData);
+            history.push("/");
         } catch (err) {
             console.log(err);
             if (err.response?.status !== 401) {
