@@ -15,9 +15,11 @@ import appStyles from "../../App.module.css";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { toast } from "react-toastify";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function SignInForm() {
     const setCurrentUser = useSetCurrentUser();
+    useRedirect('loggedIn');
 
     const [signInData, setSignInData] = useState({
         username: '',
@@ -42,7 +44,7 @@ function SignInForm() {
         try {
             const {data} = await axios.post('/dj-rest-auth/login/', signInData);
             setCurrentUser(data.user);
-            history.push('/');
+            history.goBack();
             toast.success(`Welcome ${username}`, {position: "top-center"});
         } catch (err) {
             toast.error("Could not log in. Please try again", {position: "top-center"});
