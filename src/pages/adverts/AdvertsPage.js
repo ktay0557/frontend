@@ -15,6 +15,7 @@ import NoResults from "../../assets/no-results.png";
 import Asset from "../../components/Asset";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
+import Info from "../../components/Info";
 
 function AdvertsPage({ message, filter = "" }) {
     const [adverts, setAdverts] = useState({ results: [] });
@@ -46,11 +47,7 @@ function AdvertsPage({ message, filter = "" }) {
     return (
         <Row className="h-100">
             <Col className="py-2 p-0 p-lg-2" lg={8}>
-                <p>
-                    There are currently around a quarter of a million cats
-                    without a forever home in the UK. Why don't you see if you
-                    can help us reduce that number.
-                </p>
+                <Info mobile />
                 <i className={`fas fa-search ${styles.SearchIcon}`} />
                 <Form
                     className={styles.SearchBar}
@@ -92,11 +89,7 @@ function AdvertsPage({ message, filter = "" }) {
                 )}
             </Col>
             <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                <p>
-                    There are currently around a quarter of a million cats
-                    without a forever home in the UK. Why don't you see if you
-                    can help us reduce that number.
-                </p>
+                <Info />
             </Col>
         </Row>
     );

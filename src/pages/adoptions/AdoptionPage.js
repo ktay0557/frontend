@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Adoption from "./Adoption";
+import Info from "../../components/Info";
 
 function AdoptionPage() {
     const { id } = useParams();
@@ -30,11 +31,11 @@ function AdoptionPage() {
     return (
         <Row className="h-100">
             <Col className="py-2 p-0 p-lg-2" lg={8}>
-                <p>Please reply to adoption queries as soon as possible</p>
+                <Info mobile />
                 <Adoption {...adoption.results[0]} setAdoptions={setAdoption} adoptionPage />
             </Col>
             <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-                The cats need us!
+                <Info />
             </Col>
         </Row>
     );
