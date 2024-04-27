@@ -50,7 +50,6 @@ function App() {
             render={() => (
               <AdoptionsPage
                 message="Hmm... No results. Plase adjust search."
-                filter={`owner__profile=${profile_id}&`}
               />
             )}
           />

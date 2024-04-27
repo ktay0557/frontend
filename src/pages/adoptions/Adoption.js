@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/Adoption.module.css";
+import appStyles from "../../App.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import Card from "react-bootstrap/Card";
@@ -37,32 +38,48 @@ const Adoption = (props) => {
     };
 
     return (
-        <Card className={styles.Adoption}>
-            <Card.Body>
-                <Media className="align-items-center justify-content-between">
-                    <Link to={`/profiles/${profile_id}`}>
-                        <Avatar src={profile_image} height={55} />
+        <>
+            <hr />
+            <Card className={appStyles.Content}>
+                <Card.Body>
+                    <Media className="align-items-center justify-content-between">
+                        <Link to={`/profiles/${profile_id}`}>
+                            <Avatar src={profile_image} height={55} />
+                        </Link>
+                        <div className="d-flex align-items-center">
+                            <span>{created_at}</span>
+                            {isAdminUser && adoptionPage &&
+                                <MoreDropdownStaff
+                                    handleDelete={handleDelete}
+                                />
+                            }
+                        </div>
+                    </Media>
+                </Card.Body>
+                <Card.Body>
+                    <Link to={`/adoptions/${id}`}>
+                        <Card.Text className="text-left">
+                            <strong>Name:</strong> {name}
+                        </Card.Text>
                     </Link>
-                    <div className="d-flex align-items-center">
-                        <span>{created_at}</span>
-                        {isAdminUser && adoptionPage &&
-                            <MoreDropdownStaff
-                                handleDelete={handleDelete}
-                            />
-                        }
-                    </div>
-                </Media>
-            </Card.Body>
-            <Link to={`/adoptions/${id}`}>
-                <Card.Text>{name}</Card.Text>
-            </Link>
-            <Card.Body>
-                {advert_id && <Card.Title className="text-center">{advert_id}</Card.Title>}
-                {email && <Card.Text>{email}</Card.Text>}
-                {mobile && <Card.Text>{mobile}</Card.Text>}
-                {content && <Card.Text>{content}</Card.Text>}
-            </Card.Body>
-        </Card>
+                </Card.Body>
+                <Card.Body>
+                    {advert_id && <Card.Title className={`${styles.CardTitle}`}>{advert_id}</Card.Title>}
+                    {email &&
+                        <Card.Text className="text-left">
+                            <strong>Email:</strong> {email}
+                        </Card.Text>}
+                    {mobile &&
+                        <Card.Text className="text-left">
+                            <strong>Mobile:</strong> {mobile}
+                        </Card.Text>}
+                    {content &&
+                        <Card.Text className="text-left">
+                            <strong>Adoption Query:</strong> {content}
+                        </Card.Text>}
+                </Card.Body>
+            </Card>
+        </>
     );
 };
 
