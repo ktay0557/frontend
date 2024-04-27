@@ -8,7 +8,7 @@ import Media from "react-bootstrap/Media";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
-import { MoreDropdownStaff } from "../../components/MoreDropdownStaff";
+import { MoreDropdownStaff } from "../../components/MoreDropdown";
 
 const Adoption = (props) => {
     const {

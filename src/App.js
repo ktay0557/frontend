@@ -17,6 +17,9 @@ import AdoptionPage from "./pages/adoptions/AdoptionPage";
 import AdoptionsPage from "./pages/adoptions/AdoptionsPage";
 import About from "./pages/about/About";
 import ProfilePage from "./pages/profiles/ProfilePage";
+import UsernameForm from "./pages/profiles/UsernameForm";
+import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -63,6 +66,21 @@ function App() {
           <Route exact path="/adoptions/:id" render={() => <AdoptionPage />} />
           <Route exact path="/about" render={() => <About />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() => <UsernameForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() => <UserPasswordForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEditForm />}
+          />
           <Route render={() => <p>Page Not Found!</p>} />
         </Switch>
       </Container>

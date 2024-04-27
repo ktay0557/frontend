@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 
 import Asset from "../../components/Asset";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
@@ -45,6 +46,7 @@ function ProfilePage() {
 
     const mainProfile = (
         <>
+            {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
             <Row noGutters className="px-3 text-center">
                 <Col lg={3} className="text-lg-left">
                     <Image
@@ -63,7 +65,20 @@ function ProfilePage() {
     const mainProfileDetails = (
         <>
             <hr />
-            <p className="text-center">Profile owner's details</p>
+            <p className="text-center"><strong>Name:</strong> {profile?.name}</p>
+            <p className="text-center"><strong>Age:</strong> {profile?.age}</p>
+            <p className="text-center"><strong>Email:</strong> {profile?.email}</p>
+            <p className="text-center"><strong>Mobile:</strong> {profile?.mobile}</p>
+            <p className="text-center"><strong>Location:</strong> {profile?.location}</p>
+            <p className="text-center"><strong>Previous Pets:</strong> {profile?.previously_owned}</p>
+            <p className="text-center"><strong>Current Pets:</strong> {profile?.currently_own}</p>
+            <p className="text-center"><strong>Relationship Status:</strong> {profile?.relationship_status}</p>
+            <p className="text-center"><strong>Children:</strong> {profile?.children}</p>
+            <p className="text-center"><strong>Housing:</strong> {profile?.housing}</p>
+            <p className="text-center"><strong>Hobbies:</strong> {profile?.hobbies}</p>
+            <p className="text-center"><strong>Preferred Breed:</strong> {profile?.preferred_breed}</p>
+            <p className="text-center"><strong>Preferred Age:</strong> {profile?.preferred_age}</p>
+            <p className="text-center"><strong>Preferred Sex:</strong> {profile?.preferred_sex}</p>
             <hr />
         </>
     );
