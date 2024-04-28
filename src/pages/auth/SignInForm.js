@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -12,11 +13,11 @@ import Container from "react-bootstrap/Container";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
-import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
-import { toast } from "react-toastify";
 import { useRedirect } from "../../hooks/useRedirect";
 import { setTokenTimestamp } from "../../utils/utils";
+
+import axios from "axios";
 
 function SignInForm() {
     const setCurrentUser = useSetCurrentUser();

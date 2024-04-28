@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -7,16 +8,14 @@ import Container from "react-bootstrap/Container";
 
 import Adoption from "./Adoption";
 import Asset from "../../components/Asset";
-
 import appStyles from "../../App.module.css";
 import styles from "../../styles/AdoptionsPage.module.css";
-import { useLocation } from "react-router";
-import { axiosReq } from "../../api/axiosDefaults";
-
 import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import Info from "../../components/Info";
+
+import { axiosReq } from "../../api/axiosDefaults";
 
 function AdoptionsPage({ message, filter = "" }) {
     const [adoptions, setAdoptions] = useState({ results: [] });

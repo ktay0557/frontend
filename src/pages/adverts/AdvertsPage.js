@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -7,16 +9,14 @@ import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/AdvertsPage.module.css";
-import { useLocation } from "react-router";
-import { axiosReq } from "../../api/axiosDefaults";
 import Advert from "./Advert";
-
 import NoResults from "../../assets/no-results.png";
 import Asset from "../../components/Asset";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import Info from "../../components/Info";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
+import { axiosReq } from "../../api/axiosDefaults";
 
 function AdvertsPage({ message, filter = "" }) {
     const [adverts, setAdverts] = useState({ results: [] });

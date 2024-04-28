@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -9,7 +11,7 @@ import Alert from "react-bootstrap/Alert";
 
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import { useHistory } from "react-router";
+
 import { axiosReq } from "../../api/axiosDefaults";
 
 function AdoptionCreateForm() {
@@ -66,9 +68,17 @@ function AdoptionCreateForm() {
 
         try {
             await axiosReq.post('/adoptions/', formData);
+            toast.success(
+                "Adoption Query Sent, we will be in touch within 3 working days.",
+                { position: "top-center" }
+            );
             history.push("/");
         } catch (err) {
             // console.log(err);
+            toast.error(
+                "Adoption Query not sent. Please try again",
+                { position: "top-center" }
+            );
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }

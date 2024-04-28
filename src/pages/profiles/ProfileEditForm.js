@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -9,14 +10,14 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 
-import { axiosReq } from "../../api/axiosDefaults";
 import {
     useCurrentUser,
     useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
-
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+
+import { axiosReq } from "../../api/axiosDefaults";
 
 const ProfileEditForm = () => {
     const currentUser = useCurrentUser();
@@ -148,8 +149,10 @@ const ProfileEditForm = () => {
                 ...currentUser,
                 profile_image: data.image,
             }));
+            toast.success("Profile updated successfully!", { position: "top-center" });
             history.goBack();
         } catch (err) {
+            toast.error("Profile not updated. Please try again", { position: "top-center" });
             // console.log(err);
             setErrors(err.response?.data);
         }
@@ -410,6 +413,11 @@ const ProfileEditForm = () => {
                     </Container>
                 </Col>
             </Row>
+            {errors.non_field_errors?.map((message, idx) => (
+                <Alert key={idx} variant="warning" className="mt-3">
+                    {message}
+                </Alert>
+            ))}
         </Form>
     );
 };

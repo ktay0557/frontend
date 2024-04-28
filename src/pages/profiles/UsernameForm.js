@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useHistory, useParams } from "react-router-dom";
 
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
@@ -6,16 +8,14 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-
-import { useHistory, useParams } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
 import {
     useCurrentUser,
     useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
-
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+
+import { axiosRes } from "../../api/axiosDefaults";
 
 const UsernameForm = () => {
     const [username, setUsername] = useState("");
@@ -45,6 +45,7 @@ const UsernameForm = () => {
                 ...prevUser,
                 username,
             }));
+            toast.success("Username updated!", { position: "top-center" });
             history.goBack();
         } catch (err) {
             // console.log(err);
@@ -83,6 +84,11 @@ const UsernameForm = () => {
                         >
                             Save
                         </Button>
+                        {errors.non_field_errors?.map((message, idx) => (
+                            <Alert key={idx} variant="warning" className="mt-3">
+                                {message}
+                            </Alert>
+                        ))}
                     </Form>
                 </Container>
             </Col>

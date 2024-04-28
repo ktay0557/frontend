@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
-import { axiosRes } from "../../api/axiosDefaults";
 
 import styles from "../../styles/CommentCreateEditForm.module.css";
+
+import { axiosRes } from "../../api/axiosDefaults";
 
 function CommentEditForm(props) {
     const { id, content, setShowEditForm, setComments } = props;
@@ -32,8 +34,10 @@ function CommentEditForm(props) {
                         : comment;
                 }),
             }));
+            toast.success("Comment edited successfully", {position: "top-center"});
             setShowEditForm(false);
         } catch (err) {
+            toast.error("Comment not updated. Please try again", {position: "top-center"});
             // console.log(err);
         }
     };

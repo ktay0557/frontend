@@ -1,15 +1,18 @@
 import React from "react";
-import appStyles from "../../App.module.css";
-import styles from "../../styles/Advert.module.css";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Card from "react-bootstrap/Card";
 import Media from "react-bootstrap/Media";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { Link, useHistory } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
+
+import appStyles from "../../App.module.css";
+import styles from "../../styles/Advert.module.css";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { MoreDropdown } from "../../components/MoreDropdown";
+
+import { axiosRes } from "../../api/axiosDefaults";
 
 const Advert = (props) => {
     const {
@@ -43,6 +46,7 @@ const Advert = (props) => {
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/adverts/${id}/`);
+            toast.success("Advert deleted successfully", {position: "top-center"})
             history.goBack();
         } catch (err) {
             // console.log(err);

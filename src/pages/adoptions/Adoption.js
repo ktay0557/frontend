@@ -1,14 +1,17 @@
 import React from "react";
-import styles from "../../styles/Adoption.module.css";
-import appStyles from "../../App.module.css";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { toast } from "react-toastify";
+import { Link, useHistory } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
 import Media from "react-bootstrap/Media";
-import { Link, useHistory } from "react-router-dom";
+
+import styles from "../../styles/Adoption.module.css";
+import appStyles from "../../App.module.css";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Avatar from "../../components/Avatar";
-import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdownStaff } from "../../components/MoreDropdown";
+
+import { axiosRes } from "../../api/axiosDefaults";
 
 const Adoption = (props) => {
     const {
@@ -32,6 +35,7 @@ const Adoption = (props) => {
         try {
             await axiosRes.delete(`/adoptions/${id}/`);
             history.goBack();
+            toast.success("Deletion Successful", {position: "top-center"});
         } catch (err) {
             // console.log(err);
         }

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import { useParams } from "react-router";
-import { axiosReq } from "../../api/axiosDefaults";
 import Adoption from "./Adoption";
 import Info from "../../components/Info";
+
+import { axiosReq } from "../../api/axiosDefaults";
 
 function AdoptionPage() {
     const { id } = useParams();

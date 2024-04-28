@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import styles from "../../styles/Comment.module.css";
+import { toast } from "react-toastify";
+
 import Media from "react-bootstrap/Media";
+
+import styles from "../../styles/Comment.module.css";
 import Avatar from "../../components/Avatar";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { axiosRes } from "../../api/axiosDefaults";
-
 import CommentEditForm from "./CommentEditForm";
+
+import { axiosRes } from "../../api/axiosDefaults";
 
 const Comment = (props) => {
     const {
@@ -35,7 +38,7 @@ const Comment = (props) => {
                 },
                 ],
             }));
-
+            toast.success("Comment deleted successfully", {position: "top-center"});
             setComments((prevComments) => ({
                 ...prevComments,
                 results: prevComments.results.filter((comment) => comment.id !== id),

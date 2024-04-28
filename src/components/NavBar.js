@@ -1,16 +1,19 @@
 import React from "react";
+import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
+
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
-import { NavLink } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
-import { axiosReq } from "../api/axiosDefaults";
-import { toast } from "react-toastify";
 import UseClickOutsideToggle from "../hooks/UseClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
+
+import { axiosReq } from "../api/axiosDefaults";
 
 const NavBar = () => {
     const currentUser = useCurrentUser();

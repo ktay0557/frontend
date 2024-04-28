@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
+
 import { axiosRes } from "../../api/axiosDefaults";
 
 function CommentCreateForm(props) {
@@ -35,8 +37,10 @@ function CommentCreateForm(props) {
                     },
                 ],
             }));
+            toast.success("Comment added successfully", {position: "top-center"});
             setContent("");
         } catch (err) {
+            toast.error("Comment could not be added. Please try again", {position: "top-center"});
             // console.log(err);
         }
     };

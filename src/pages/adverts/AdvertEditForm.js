@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useParams } from "react-router";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -6,15 +9,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
+import Image from "react-bootstrap/Image";
 
 import styles from "../../styles/AdvertCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Image from "react-bootstrap/Image";
-import { useHistory } from "react-router-dom";
+
 import { axiosReq } from "../../api/axiosDefaults";
-import { toast } from "react-toastify";
-import { useParams } from "react-router";
 
 function AdvertEditForm() {
     const [advertData, setAdvertData] = useState({
@@ -64,17 +65,17 @@ function AdvertEditForm() {
                 } = data;
 
                 is_owner ? setAdvertData({
-                        title,
-                        name,
-                        age,
-                        breed,
-                        sex,
-                        children,
-                        other_animals,
-                        content,
-                        image
-                    }) : history.push("/");
-            } catch (err) { 
+                    title,
+                    name,
+                    age,
+                    breed,
+                    sex,
+                    children,
+                    other_animals,
+                    content,
+                    image
+                }) : history.push("/");
+            } catch (err) {
                 // console.log(err);
             }
         };
@@ -139,6 +140,11 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.title?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Form.Group>
                 <Form.Label>Cat's Name</Form.Label>
@@ -149,6 +155,11 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.name?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Form.Group>
                 <Form.Label>Age</Form.Label>
@@ -159,6 +170,11 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.age?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Form.Group>
                 <Form.Label>Breed</Form.Label>
@@ -169,6 +185,11 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.breed?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Form.Group>
                 <Form.Label>Sex</Form.Label>
@@ -179,6 +200,11 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.sex?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Form.Group>
                 <Form.Label>Behaviour around children</Form.Label>
@@ -189,6 +215,11 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.children?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Form.Group>
                 <Form.Label>Behaviour around animals</Form.Label>
@@ -199,6 +230,11 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.other_animals?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Form.Group>
                 <Form.Label>Additional Information</Form.Label>
@@ -210,15 +246,20 @@ function AdvertEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.content?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                    {message}
+                </Alert>
+            ))}
 
             <Button
                 className={`${btnStyles.Button} ${btnStyles.Purple}`}
                 onClick={() => history.goBack()}
             >
-                cancel
+                Cancel
             </Button>
             <Button className={`${btnStyles.Button} ${btnStyles.Purple}`} type="submit">
-                update
+                Update
             </Button>
         </div>
     );
@@ -234,21 +275,21 @@ function AdvertEditForm() {
                         className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
                     >
                         <Form.Group className="text-center">
-                                    <figure>
-                                        <Image
-                                            className={appStyles.Image}
-                                            src={image}
-                                            rounded
-                                        />
-                                    </figure>
-                                    <div>
-                                        <Form.Label
-                                            className={`${btnStyles.Button} ${btnStyles.Purple} btn`}
-                                            htmlFor="image-upload"
-                                        >
-                                            Update Image
-                                        </Form.Label>
-                                    </div>
+                            <figure>
+                                <Image
+                                    className={appStyles.Image}
+                                    src={image}
+                                    rounded
+                                />
+                            </figure>
+                            <div>
+                                <Form.Label
+                                    className={`${btnStyles.Button} ${btnStyles.Purple} btn`}
+                                    htmlFor="image-upload"
+                                >
+                                    Update Image
+                                </Form.Label>
+                            </div>
 
                             <Form.File
                                 id="image-upload"
@@ -267,6 +308,11 @@ function AdvertEditForm() {
                     </Container>
                 </Col>
             </Row>
+            {errors.non_field_errors?.map((message, idx) => (
+                <Alert key={idx} variant="warning" className="mt-3">
+                    {message}
+                </Alert>
+            ))}
         </Form>
     );
 }
