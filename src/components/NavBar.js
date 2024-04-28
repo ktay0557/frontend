@@ -119,7 +119,7 @@ const NavBar = () => {
         <Navbar
             expanded={expanded}
             className={styles.NavBar}
-            expand="lg"
+            expand="xl"
             fixed="top"
         >
             <Container>
@@ -128,7 +128,6 @@ const NavBar = () => {
                         <img src={logo} alt="logo" height="45" />
                     </Navbar.Brand>
                 </NavLink>
-                {isAdminUser ? isAdminIcons : null}
                 <Navbar.Toggle
                     ref={ref}
                     onClick={() => setExpanded(!expanded)}
@@ -136,6 +135,7 @@ const NavBar = () => {
                 />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto text-left">
+                        {isAdminUser ? isAdminIcons : null}
                         <NavLink
                             exact
                             className={styles.NavLink}
