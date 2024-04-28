@@ -19,9 +19,8 @@ function AdoptionPage() {
                     axiosReq.get(`/adoptions/${id}`),
                 ]);
                 setAdoption({ results: [adoption] });
-                console.log(adoption);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         };
 

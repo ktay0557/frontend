@@ -32,7 +32,7 @@ function AdoptionsPage({ message, filter = "" }) {
                 setAdoptions(data);
                 setHasLoaded(true);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         };
 

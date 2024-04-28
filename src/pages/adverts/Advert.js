@@ -45,7 +45,7 @@ const Advert = (props) => {
             await axiosRes.delete(`/adverts/${id}/`);
             history.goBack();
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -61,7 +61,7 @@ const Advert = (props) => {
                 }),
             }));
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -77,7 +77,7 @@ const Advert = (props) => {
                 }),
             }));
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 

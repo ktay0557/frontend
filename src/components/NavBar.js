@@ -26,7 +26,7 @@ const NavBar = () => {
             removeTokenTimestamp();
             toast.success("Signed out successfully!", { position: "top-center" });
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 

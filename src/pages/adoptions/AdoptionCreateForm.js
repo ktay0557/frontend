@@ -65,11 +65,10 @@ function AdoptionCreateForm() {
         formData.append('advert_id', advert_id);
 
         try {
-            console.log(formData);
             await axiosReq.post('/adoptions/', formData);
             history.push("/");
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }

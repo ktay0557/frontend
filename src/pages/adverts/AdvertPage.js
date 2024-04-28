@@ -33,7 +33,7 @@ function AdvertPage() {
                 setAdvert({ results: [advert] });
                 setComments(comments);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         };
 

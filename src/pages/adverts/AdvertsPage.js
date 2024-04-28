@@ -16,6 +16,7 @@ import Asset from "../../components/Asset";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import Info from "../../components/Info";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function AdvertsPage({ message, filter = "" }) {
     const [adverts, setAdverts] = useState({ results: [] });
@@ -24,6 +25,8 @@ function AdvertsPage({ message, filter = "" }) {
 
     const [query, setQuery] = useState("");
 
+    const currentUser = useCurrentUser();
+
     useEffect(() => {
         const fetchAdverts = async () => {
             try {
@@ -31,7 +34,7 @@ function AdvertsPage({ message, filter = "" }) {
                 setAdverts(data);
                 setHasLoaded(true);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         };
 
@@ -42,7 +45,7 @@ function AdvertsPage({ message, filter = "" }) {
         return () => {
             clearTimeout(timer);
         };
-    }, [filter, query, pathname]);
+    }, [filter, query, pathname, currentUser]);
 
     return (
         <Row className="h-100">
