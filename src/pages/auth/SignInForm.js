@@ -16,6 +16,7 @@ import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { toast } from "react-toastify";
 import { useRedirect } from "../../hooks/useRedirect";
+import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
     const setCurrentUser = useSetCurrentUser();
@@ -44,6 +45,7 @@ function SignInForm() {
         try {
             const {data} = await axios.post('/dj-rest-auth/login/', signInData);
             setCurrentUser(data.user);
+            setTokenTimestamp(data);
             history.goBack();
             toast.success(`Welcome ${username}`, {position: "top-center"});
         } catch (err) {

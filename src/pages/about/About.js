@@ -23,12 +23,16 @@ const About = () => {
                         It also makes sure they are up to date on their vaccinations and are 
                         spayed/neutered. This means that when they are finally ready to go to their 
                         forever home, they can do so happy and healthy.
-                        <hr />
+                    </p>
+                    <hr />
+                    <p>
                         Please feel free to browse the cats we currently have in our care.
                         If any call out to you, don't hesitate to register for free to be able
                         to enquire over adopting the little cutie, or letting us know of any 
                         queries you may have.
-                        <hr />
+                    </p>
+                    <hr />
+                    <p>
                         We look forward to helping you find your Purrfect Match!
                     </p>
                 </Col>
