@@ -12,10 +12,12 @@ function CommentEditForm(props) {
 
     const [formContent, setFormContent] = useState(content);
 
+    // Handle form changes
     const handleChange = (event) => {
         setFormContent(event.target.value);
     };
 
+    // Handle form submissions
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {

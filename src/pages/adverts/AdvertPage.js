@@ -23,6 +23,7 @@ function AdvertPage() {
     const profile_image = currentUser?.profile_image;
     const [comments, setComments] = useState({ results: [] });
 
+    // GET request to retrieve adverts by id and associated comments
     useEffect(() => {
         const handleMount = async () => {
             try {

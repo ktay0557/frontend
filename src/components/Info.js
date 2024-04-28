@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles/Info.module.css";
 import Container from "react-bootstrap/Container";
 
+// Info component to display information to the user.
 const Info = ({ mobile }) => {
     return (
         <Container

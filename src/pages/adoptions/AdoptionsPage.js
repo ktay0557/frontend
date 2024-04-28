@@ -24,6 +24,7 @@ function AdoptionsPage({ message, filter = "" }) {
 
     const [query, setQuery] = useState("");
 
+    // Fetch adoptions
     useEffect(() => {
         const fetchAdoptions = async () => {
             try {

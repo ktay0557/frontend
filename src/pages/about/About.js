@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 
 import styles from "../../styles/About.module.css";
 
+// Provides About info for the users to see
 const About = () => {
     return (
         <Container className={styles.About}>

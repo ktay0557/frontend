@@ -63,6 +63,7 @@ const ProfileEditForm = () => {
 
     const [errors, setErrors] = useState({});
 
+    // GET request to retireve profiles by id
     useEffect(() => {
         const handleMount = async () => {
             if (currentUser?.profile_id?.toString() === id) {
@@ -114,6 +115,7 @@ const ProfileEditForm = () => {
         handleMount();
     }, [currentUser, history, id]);
 
+    // Handle form changes
     const handleChange = (event) => {
         setProfileData({
             ...profileData,
@@ -121,6 +123,7 @@ const ProfileEditForm = () => {
         });
     };
 
+    // Handle form submissions
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();

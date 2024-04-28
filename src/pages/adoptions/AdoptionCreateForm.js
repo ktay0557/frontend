@@ -37,6 +37,7 @@ function AdoptionCreateForm() {
 
     const history = useHistory();
 
+    // Fetch adverts
     useEffect(() => {
         const fetchAdverts = async () => {
             try {
@@ -49,6 +50,7 @@ function AdoptionCreateForm() {
         fetchAdverts();
     }, []);
 
+    // Handle form change
     const handleChange = (event) => {
         setAdoptionData({
             ...adoptionData,
@@ -56,6 +58,7 @@ function AdoptionCreateForm() {
         });
     };
 
+    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();

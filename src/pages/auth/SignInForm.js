@@ -34,6 +34,7 @@ function SignInForm() {
 
     const history = useHistory();
 
+    // Handle form changes
     const handleChange = (event) => {
         setSignInData({
             ...signInData,
@@ -41,6 +42,7 @@ function SignInForm() {
         });
     };
 
+    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {

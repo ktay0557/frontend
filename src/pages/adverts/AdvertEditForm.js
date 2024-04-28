@@ -47,6 +47,7 @@ function AdvertEditForm() {
     const history = useHistory();
     const { id } = useParams();
 
+    // GET request to retrieve adverts by id
     useEffect(() => {
         const handleMount = async () => {
             try {
@@ -83,6 +84,7 @@ function AdvertEditForm() {
         handleMount();
     }, [history, id]);
 
+    // Handle form changes
     const handleChange = (event) => {
         setAdvertData({
             ...advertData,
@@ -90,6 +92,7 @@ function AdvertEditForm() {
         });
     };
 
+    // Handle image changes
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
             URL.revokeObjectURL(image);
@@ -100,6 +103,7 @@ function AdvertEditForm() {
         }
     };
 
+    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();

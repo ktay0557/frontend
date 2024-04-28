@@ -1,6 +1,7 @@
 import jwtDecode from "jwt-decode";
 import { axiosReq } from "../api/axiosDefaults"
 
+// fetchMoreData for use in infinite scrolling
 export const fetchMoreData = async (resource, setResource) => {
     try {
         const {data} = await axiosReq.get(resource.next);
@@ -16,6 +17,7 @@ export const fetchMoreData = async (resource, setResource) => {
     } catch (err) {}
 };
 
+// Fix for the token refresh
 export const setTokenTimestamp = (data) => {
     const refreshTokenTimestamp = jwtDecode(data?.refresh_token).exp;
     localStorage.setItem("refreshTokenTimestamp", refreshTokenTimestamp);

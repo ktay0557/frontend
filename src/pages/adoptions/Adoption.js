@@ -31,6 +31,7 @@ const Adoption = (props) => {
     const isAdminUser = currentUser && currentUser.is_staff_user;
     const history = useHistory();
 
+    // Handle delete of the adoption queries
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/adoptions/${id}/`);

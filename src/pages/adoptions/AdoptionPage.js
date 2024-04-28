@@ -13,6 +13,7 @@ function AdoptionPage() {
     const { id } = useParams();
     const [adoption, setAdoption] = useState({ results: [] });
 
+    // GET request to retrieve adoptions by id
     useEffect(() => {
         const handleMount = async () => {
             try {

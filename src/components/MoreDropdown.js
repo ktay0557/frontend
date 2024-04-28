@@ -3,8 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
 
-// The forwardRef is important!!
-// Dropdown needs access to the DOM node in order to position the Menu
+// Provides the clickable three dot icon
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
     <i
         className="fas fa-ellipsis-v"
@@ -16,6 +15,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
     />
 ));
 
+// This gives the dropdown menu for allowing users to choose to edit and delete.
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
     return (
         <Dropdown className="ml-auto" drop="left">
@@ -44,7 +44,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
     )
 };
 
-
+// This gives staff the menu to delete fulfilled adoption queries
 export const MoreDropdownStaff = ({ handleDelete }) => {
     return (
         <Dropdown className="ml-auto" drop="left">
@@ -66,7 +66,7 @@ export const MoreDropdownStaff = ({ handleDelete }) => {
     )
 };
 
-
+// Provides dropdown menu to edit profiles
 export function ProfileEditDropdown({ id }) {
     const history = useHistory();
     return (

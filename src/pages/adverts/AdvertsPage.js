@@ -27,6 +27,7 @@ function AdvertsPage({ message, filter = "" }) {
 
     const currentUser = useCurrentUser();
 
+    // Fetch adverts
     useEffect(() => {
         const fetchAdverts = async () => {
             try {

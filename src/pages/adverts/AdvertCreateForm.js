@@ -48,6 +48,7 @@ function AdvertCreateForm() {
 
     const history = useHistory();
 
+    // Handle form changes
     const handleChange = (event) => {
         setAdvertData({
             ...advertData,
@@ -55,6 +56,7 @@ function AdvertCreateForm() {
         });
     };
 
+    // Handle image changes
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
             URL.revokeObjectURL(image);
@@ -65,6 +67,7 @@ function AdvertCreateForm() {
         }
     };
 
+    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();

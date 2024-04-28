@@ -35,6 +35,7 @@ const UsernameForm = () => {
         }
     }, [currentUser, history, id]);
 
+    // Handle form submissions
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {

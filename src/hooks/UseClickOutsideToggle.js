@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+// Allows automatic closing of nav when users clicks
 const UseClickOutsideToggle = () => {
     const [expanded, setExpanded] = useState(false);
     const ref = useRef(null);

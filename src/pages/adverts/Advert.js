@@ -39,10 +39,12 @@ const Advert = (props) => {
     const is_owner = currentUser?.username === owner;
     const history = useHistory();
 
+    // Direct user to edit advert page
     const handleEdit = () => {
         history.push(`/adverts/${id}/edit`);
     };
 
+    // Handle deleting of adverts
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/adverts/${id}/`);
@@ -53,6 +55,7 @@ const Advert = (props) => {
         }
     };
 
+    // Handle liking adverts
     const handleLike = async () => {
         try {
             const { data } = await axiosRes.post("/likes/", { advert: id });
@@ -69,6 +72,7 @@ const Advert = (props) => {
         }
     };
 
+    // Handle unliking adverts    
     const handleUnlike = async () => {
         try {
             await axiosRes.delete(`/likes/${like_id}/`);

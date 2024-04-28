@@ -25,6 +25,7 @@ function ProfilePage() {
     const { pageProfile } = useProfileData();
     const [profile] = pageProfile.results;
 
+    // GET request to retrieve profiles by id
     useEffect(() => {
         const fetchData = async () => {
             try {

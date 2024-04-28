@@ -22,6 +22,7 @@ const NavBar = () => {
 
     const { expanded, setExpanded, ref } = UseClickOutsideToggle();
 
+    // Handle log out functionality
     const handleSignOut = async () => {
         try {
             await axiosReq.post("dj-rest-auth/logout/");
@@ -33,6 +34,7 @@ const NavBar = () => {
         }
     };
 
+    // Provides icons to staff members when logged in
     const isAdminIcons = (
         <>
             <NavLink
@@ -53,6 +55,7 @@ const NavBar = () => {
         </>
     )
 
+    // Provides icons to logged in users
     const loggedInIcons = <>
         <NavLink
             className={styles.NavLink}
@@ -90,6 +93,8 @@ const NavBar = () => {
             <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
         </NavLink>
     </>
+    
+    // Provides icons for all users not logged in
     const loggedOutIcons = (
         <>
             <NavLink
